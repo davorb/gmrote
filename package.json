@@ -1,0 +1,10 @@
+{
+  "name": "gmrote",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Davor Babic",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.14.1"
+  }
+}

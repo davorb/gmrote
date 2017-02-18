@@ -1,0 +1,186 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  //font-family: 'Roboto', sans-serif;
+  background: #F5F7FA;
+  color: #E6E9ED;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+    margin-top: 3%;
+}
+
+.glass {
+  //background-image: url("http://audioinkradio.com/wp-content/uploads/2013/04/daft-punk-image-album-cover.jpg");
+  background-size: cover;
+  background-color: #fff;
+  background-position: center center;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  opacity: 0.4;
+  z-index: -1;
+  filter: blux(25px);
+  -webkit-filter: blur(25px);
+  -moz-filter: blur(25px);
+  -o-filter: blur(25px);
+  -ms-filter: blur(25px);
+}
+
+p {
+  margin: 0;
+}
+
+#player {
+  background: #967ADC;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  padding-top: 5%;
+  max-width: 450px;
+
+  -webkit-box-shadow: 5px 6px 25px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 5px 6px 25px 0px rgba(0,0,0,0.75);
+  box-shadow: 5px 6px 25px 0px rgba(0,0,0,0.75);
+}
+
+#currently-playing {
+  background: #967ADC;
+  display: flex;
+  flex-direction: column;
+  //justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  padding-top: 5%;
+}
+
+img {
+  width: 60%;
+  border-radius: 50%;
+  //animation: spin 15s linear infinite;
+  border-style: solid;
+  border-width: 4px;
+  border-color: #F5F7FA;
+  animation: spinHorizontal 0.3s 1 ease-in;
+}
+
+.song-info {
+  margin: 1em;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  padding: 0;
+  text-align: center;
+}
+
+#song {
+  font-weight: 300;
+  font-size: 5vh;
+}
+
+#artist {
+  margin-top: 10px;
+  font-weight: 400;
+  font-size: 2.8vh;
+}
+
+#player-controls {
+  background: #ac92ec;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  align-self: flex-end !important;
+}
+
+#player-controls .material-icons {
+  margin: 20px;
+  margin-top: 24px;
+  padding: 12px;
+  font-size: 7vh;
+  //background-color: #967ADC;
+  border-radius: 50%;
+  border-width: 1px;
+  cursor: default;
+}
+
+#player-controls .pause {
+  border-style: solid;
+  border-color: #967adc;
+  background-color: #967ADC;
+  font-size: 12vh !important;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.player-controls .material-icons:hover {
+  //font-size: 3.1em;
+  //transition: font-size .25s ease-in-out;
+}
+
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); } }
+
+
+@keyframes spinHorizontal {
+  0% { transform: rotateY(90deg); }
+  100% { transform: rotateY(0deg); }
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 800px) {
+  body, html {
+	background: red;
+	margin: 0;
+  }
+
+  #player {
+	min-width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	overflow: auto;
+	padding-top: 3%;
+  }
+
+  #currently-playing {
+	min-width: 100%;
+	height: 100%;
+  }
+
+  #player-controls {
+	min-height: 17%;
+	position: fixed;
+	bottom: 0;
+  }
+}
+
+/* Desktops and laptops ----------- */
+@media only screen and (min-width : 1024px) {
+  #player {
+	box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+	width: 380px;
+	//min-height: 300px;
+  }
+
+  #player-controls .material-icons {
+	font-size: 3.8em;
+  }
+
+  #player-controls .pause {
+	font-size: 4.5em !important;
+  }
+}
