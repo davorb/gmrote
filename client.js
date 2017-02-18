@@ -3,28 +3,22 @@
 
   let authorizationCode;
 
-  let ws = new WebSocket('ws://localhost:5672');
+  let ws = new WebSocket('ws://192.168.1.2:5672');
 
-  (function () {
-    let pauseButton = document.getElementById('pause-btn');
-    pauseButton.onclick = function () {
-      ws.send(JSON.stringify({
-        "namespace": "playback",
-        "method": "playPause"
-      }));
-      console.log('clicked pause');
-    };
+  function setPlaybackButton(id, method) {
+    return document
+      .getElementById(id)
+      .onclick = function () {
+        ws.send(JSON.stringify({
+          "namespace": "playback",
+          "method": method
+        }));
+      };
+  }
 
-    let backButton = document.getElementById('back-btn');
-    backButton.onclick = function () {
-
-    };
-
-    let forwardButton = document.getElementById('forward-btn');
-    forwardButton.onclick = function () {
-
-    };
-  })();
+  setPlaybackButton('pause-btn', 'playPause');
+  setPlaybackButton('back-btn', 'rewind');
+  setPlaybackButton('forward-btn', 'forward');
 
   ws.onmessage = function (event) {
     let data = JSON.parse(event.data);
