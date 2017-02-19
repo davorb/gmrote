@@ -6,9 +6,8 @@ html, body {
 
 body {
     font-family: 'Lato', sans-serif;
-    //font-family: 'Roboto', sans-serif;
-    background: #F5F7FA;
-    color: #E6E9ED;
+    background: #f5f7fa;
+    color: #e6e9ed;
     display: flex;
     justify-content: center;
 }
@@ -105,14 +104,16 @@ img {
 }
 
 #player-controls .material-icons {
-    margin: 10px;
-    margin-bottom: 15px;
+    margin: 15px;
     padding: 12px;
     font-size: 3em;
-    //background-color: #967ADC;
     border-radius: 50%;
     border-width: 1px;
     cursor: default;
+}
+
+#player-controls .material-icons:hover {
+    color: #eff3f7;
 }
 
 #player-controls .pause {

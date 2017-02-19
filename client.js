@@ -26,7 +26,7 @@
   ws.onmessage = function (event) {
     let data = JSON.parse(event.data);
 
-    console.log(data.channel);
+    //console.log(data.channel);
 
     if (data.channel === 'track') {
       let payload = data.payload;
