@@ -1,9 +1,12 @@
 (function () {
   console.log('Loaded client javascript');
 
+  let host = 'localhost',
+      port = '4567';
+
   let authorizationCode;
 
-  let ws = new WebSocket('ws://192.168.1.2:5672');
+  let ws = new WebSocket(`ws://${host}:5672`);
 
   function setPlaybackButton(id, method) {
     return document
@@ -46,30 +49,51 @@
     } else if (data.channel === 'connect') {
       console.log(`Received permanent code ${data.payload}`);
       authorizationCode = data.payload;
+      setAuthCode(authorizationCode);
     }
   };
 
-  ws.onopen = function (event) {
-    if (!authorizationCode) {
-      ws.send(JSON.stringify({
-        "namespace": "connect",
-        "method": "connect",
-        "arguments": ["gmrote"]
-      }));
-    }
-  };
+  function setSongInfo(title, artist, artURL) {
+    document
+      .getElementById('song')
+      .textContent = title;
+    document
+      .getElementById('artist')
+      .textContent = artist;
+    document
+      .getElementById('art')
+      .setAttribute('src', artURL);
+    document
+      .getElementsByClassName('glass')[0]
+      .style
+      .backgroundImage = `url('${artURL}')`;
+  }
 
-  function setSongInfo (title, artist, artURL) {
-    let elemTitle = document.getElementById('song');
-    elemTitle.textContent = title;
+  (function fetchAuthCode() {
+    let oReq = new XMLHttpRequest();
+    oReq.addEventListener('load', function () {
+      if (!this.responseText) {
+        // request auth code
+        ws.send(JSON.stringify({
+          "namespace": "connect",
+          "method": "connect",
+          "arguments": ["gmrote"]
+        }));
+      } else {
+        console.log(`Reading token as ${this.responseText}`);
+        authorizationCode = this.responseText;
+      }
+    });
 
-    let elemArtist = document.getElementById('artist');
-    elemArtist.textContent = artist;
+    oReq.open("GET", `http://${host}:${port}/token`);
+    oReq.send();
+  })();
 
-    let elemArt = document.getElementById('art');
-    art.setAttribute('src', artURL);
-
-    let elemGlass = document.getElementsByClassName('glass')[0];
-    elemGlass.style.backgroundImage = "url('"+artURL+"')";
+  function setAuthCode(code) {
+    console.log(`trying to set auth code ${code}`);
+    let oReq = new XMLHttpRequest();
+    oReq.open('POST', `http://${host}:${port}/token`, true);
+    oReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    oReq.send(`token=${code}`);
   }
 })();

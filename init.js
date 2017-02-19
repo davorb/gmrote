@@ -1,11 +1,17 @@
-let fs = require('fs');
-let express = require('express');
-let app = express();
+let fs = require('fs'),
+    express = require('express'),
+    bodyParser = require('body-parser'),
+    app = express();
+
+let tokenFileName = 'token.conf';
 
 app.use(express.static('.'));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/token', function (req, res) {
-  fs.readFile('token.conf', 'utf8', function (err, data) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  fs.readFile(tokenFileName, 'utf8', function (err, data) {
     if (err) {
       return console.log(err);
     }
@@ -15,8 +21,13 @@ app.get('/token', function (req, res) {
 });
 
 app.post('/token', function (req, res) {
-  console.log('-------');
-  console.dir(req.params);
+  let token = req.body.token;
+  if (token) {
+    fs.writeFile(tokenFileName, token, err => {
+      return console.log(err);
+    });
+    console.log(`Saved token ${token}`);
+  }
   res.end();
 });
 
