@@ -1,8 +1,8 @@
 (function () {
   console.log('Loaded client javascript');
 
-  let host = 'localhost',
-      port = '4567';
+  let host = window.location.hostname,
+      port = window.location.port;
 
   let authorizationCode;
 
