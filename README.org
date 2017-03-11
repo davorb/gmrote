@@ -1,0 +1,7 @@
+#+TITLE: README
+#+AUTHOR: Davor Babić
+
+[[./screenshot.png]]
+
+=gmrote= is a remote control for [[https://www.googleplaymusicdesktopplayer.com/][Google Play Music Desktop Player]]. You
+can run it by typing =npm start=.
